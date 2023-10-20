@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Context from './context/geolocation.context';
+import IndexPage from './pages/index';
+import Error from './components/error';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Context.Provider>
+          <header className="App-header"></header>
+          <Routes>
+            <Route path="/" element={<IndexPage />} />
+            <Route path="/*" element={<Error />} />
+          </Routes>
+        </Context.Provider>
+      </div>
+    </BrowserRouter>
   );
 }
 
