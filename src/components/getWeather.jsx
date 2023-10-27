@@ -23,28 +23,34 @@ export default function GetWeather(props) {
         getTemperature();
     }, [props])
     return (
-        <div>
+        <div className='weather'>
             {locationData != null && currentData != null &&
                 <>
+                    <div className={currentData.is_day === "yes" ? "day" : "night"}>
+                        <img src="" alt="" />
+                    </div>
                     <div className='weather_location'>
                         <h2>{locationData.name},{locationData.region}, {locationData.country}</h2>
                         <p> Actualisé : {locationData.localtime}</p>
                     </div>
                     <div className='weather_temperature'>
-                        <h3>Prévision actuelle</h3>
-                        <p><span>Temperature : </span>{currentData.temperature}</p>
-                        <img src={currentData.weeather_icons} alt={currentData.weeather_description} />
+                        <h3>Prévision actuelle :</h3>
+                        <p><span className="weather_span">Temperature : </span>{currentData.temperature}</p>
+                        <img src={currentData.weather_icons} alt={currentData.weeather_description} />
                     </div>
-                    <div className='weather_wind'>
-                        <p><span>Vent : </span> {currentData.wind_speed}</p>
-                        <p><span>direction : </span> {currentData.wind_dir}</p>
+                    <div className="weather_more">
+                        <div className='weather_wind'>
+                            <p><span className="weather_span">Vent : </span> {currentData.wind_speed}</p>
+                            <p><span className="weather_span">direction : </span> {currentData.wind_dir}</p>
+                        </div>
+                        <div className='weather_uv'>
+                            <p><span className="weather_span">UV : </span> {currentData.uv_index} /10</p>
+                        </div>
+                        <div className="weather_humidity">
+                            <p><span className="weather_span">L'humidité : </span> {currentData.humidity}</p>
+                        </div>
                     </div>
-                    <div className='weather_uv'>
-                        <p><span>UV : </span> {currentData.uv} /10</p>
-                    </div>
-                    <div className="weather_humidity">
-                        <p><span>L'humidité : </span> {currentData.humidity}</p>
-                    </div>
+
                 </>
 
             }
